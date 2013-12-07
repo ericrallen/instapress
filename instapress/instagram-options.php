@@ -1,20 +1,20 @@
 <div class="wrap" id="instagram-settings">
 	<h2>Instapress <?php _e('Settings', 'instagram'); ?></h2>
-	
+
 	<?php
 		$isPHP5 = (version_compare(phpversion(), '5.0.0', '>='));
-		
+
 		if(!$isPHP5)
 		{
 			$instapressErrors = array(sprintf(__('Instapress requires at least PHP 5.0 to work properly, your version is: %s', 'instagram'), phpversion()));
 		}
 		else
 		{
-			// Fehlermeldungen ausgeben 
+			// Fehlermeldungen ausgeben
 			$instapressErrors = InstagramPlugin::getInstance()->getErrors();
 		}
-		
-		if($instapressErrors): 
+
+		if($instapressErrors):
 	?>
 	<div class="error">
 		<?php foreach($instapressErrors as $instapressError): ?>
@@ -23,16 +23,16 @@
 		</p>
 		<?php endforeach; ?>
 	</div>
-	<?php 
-		endif; // $instapressErrors 
+	<?php
+		endif; // $instapressErrors
 	?>
-	
+
 	<?php if($isPHP5): ?>
 	<form method="post">
-	<?php 
-	
+	<?php
+
 		$instagramOptions = InstagramPlugin::getInstance()->getOptions();
-			
+
 		if(InstagramPlugin::getInstance()->getAccessToken()):
 			echo '<div class="success">';
 			_e('Your application is authorized, have fun!', 'instagram');
@@ -71,12 +71,12 @@
 			endif;
 		?>
 		<h3><?php _e('General settings', 'instagram'); ?></h3>
-		<?php 
+		<?php
 			if(InstagramPlugin::getInstance()->cacheIsWritable()): // Cache aktiv?
 		?>
 		<div>
 			<label for="instagram-cache-time"><?php _e('Refresh cache after', 'instagram') ?></label>
-			<?php 
+			<?php
 				$possibleCacheTimes = array(0, 5, 10, 15, 30, 45, 60);
 			?>
 			<select id="instagram-cache-time" name="instagram-cache-time">
@@ -85,24 +85,24 @@
 				<?php endforeach; ?>
 			</select><?php _e('minutes', 'instagram') ?>
 		</div>
-		<?php 
+		<?php
 			else: // Cache inaktiv
 		?>
 		<div>
 			<p><?php _e('Cache is not active', 'instagram'); ?></p>
 		</div>
-		<?php 
+		<?php
 			endif;
 		?>
 		<p>
-			<input type="checkbox" class="button-primary" name="instagram-disable-fancybox" id="instagram-disable-fancybox" <?php echo esc_attr( $instagramOptions['app_disable_effects'] ) ? ' checked="checked"' : '' ?> />
+			<input type="checkbox"  name="instagram-disable-fancybox" id="instagram-disable-fancybox" <?php echo esc_attr( $instagramOptions['app_disable_effects'] ) ? ' checked="checked"' : '' ?> />
 			<label for="instagram-disable-fancybox"><?php _e('Disable any effects (e.g. fancybox)', 'instagram'); ?> </label>
 			<span style="display: block">
 				<i>(<?php _e('Note: Do only check this if you are having conflicts with other effects or if you do not want to use any effect', 'instagram'); ?>)</i>
 			</span>
 		</p>
 		<p>
-			<input type="checkbox" class="button-primary" name="instagram-show-backlink" id="instagram-show-backlink" <?php echo esc_attr( $instagramOptions['app_show_backlink'] ) ? ' checked="checked"' : '' ?> />
+			<input type="checkbox" name="instagram-show-backlink" id="instagram-show-backlink" <?php echo esc_attr( $instagramOptions['app_show_backlink'] ) ? ' checked="checked"' : '' ?> />
 			<label for="instagram-show-backlink"><?php _e('Support Instapress by showing a backlink to http://instapress.it among widget or gallery', 'instagram'); ?> </label>
 		</p>
 		<div>
@@ -111,7 +111,7 @@
 				<?php _e('Those settings may only affect you if you have a basic understanding for HTML.', 'instagram'); ?>
 			</p>
 			<p>
-				<input type="checkbox" class="button-primary" name="instagram-disable-image-attr" id="instagram-disable-image-attr" <?php echo esc_attr( $instagramOptions['app_disable_image_attributes'] ) ? ' checked="checked"' : '' ?> />
+				<input type="checkbox"  name="instagram-disable-image-attr" id="instagram-disable-image-attr" <?php echo esc_attr( $instagramOptions['app_disable_image_attributes'] ) ? ' checked="checked"' : '' ?> />
 				<label for="instagram-disable-image-attr"><?php _e('Disable width and height attribute for images (e.g. for responsive layouts)', 'instagram'); ?> </label>
 			</p>
 		</div>
